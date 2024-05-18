@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="centered col-md-4 login">
+            <div class="text-center logo-login">
+                <img src="https://www.krungsrinimble.com/theme-custom/images/logo.png" class="rounded" alt="nimble">
+              </div>
+            <form name="formLogin" #f="ngForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="username" class="form-label text-light" for="username">ชื่อผู้ใช่งาน</label>
+                    <input type="text" class="form-control" [(ngModel)]="formLogin.username" name="username" id="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label text-light" for="password">รหัสผ่าน</label>
+                    <input type="password" class="form-control" [(ngModel)]="formLogin.password" name="password" id="password">
+                </div>
+                <div class="text-center"> 
+                    <button type="submit" class="btn btn-outline-warning col-md-4">เข้าสู่ระบบ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title text-danger" id="modal-basic-title">{{title}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <ngb-alert type="danger" [dismissible]="false">
+            {{message}}
+        </ngb-alert>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="activeModal.dismiss('Cross click')">ปิดหน้าต่าง</button>
+  </div>
