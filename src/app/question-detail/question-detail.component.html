@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="d-flex justify-content-md-end">
+        @if (display) {<div class="col-md-2 text-center">
+            <h2>นาฬิกาจับเวลา <br> {{display}}</h2>
+        </div>
+        }
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="centered col-md-4 question">
+            <div class="text-center question-logo">
+                <img src="https://www.krungsrinimble.com/theme-custom/images/logo.png" class="rounded" alt="nimble">
+            </div>
+
+            <h5 class="text-light margin-space">{{questionInfo?.title}}</h5>
+            @for (question of questionInfo?.questionAnswerInfo; track question.questionAnswerId){
+            <div class="form-check text">
+                <input class="form-check-input" type="checkbox" [name]="question.questionAnswerId"
+                    [value]='question.questionAnswerId' (change)="onChangeValue(question.questionAnswerId)">
+                <label class="form-check-label text-light" for="flexRadioDefault">
+                    {{question.answer}}
+                </label>
+            </div>
+            }@empty {
+            Empty list of question
+            }
+            @if(currentIndex !== (questionDetail?.data?.totalQuestion || 0) - 1){
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
+                        (click)="next(questionInfo?.questionId)">ถัดไป</button>
+                </div>
+            }
+            @if(questionDetail?.data?.totalQuestion == currentIndex+1){
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
+                        (click)="sendAnswer(questionInfo?.questionId)">ส่งคำตอบ</button>
+                </div>
+                }
+            @if(currentIndex >= 1){
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space" (click)="back()">ย้อนกลับ</button>
+                </div>
+            }
+           
+
+        </div>
+    </div>
+</div>

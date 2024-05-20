@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+      <div class="centered col-md-4 question">
+        <div class="text-center question-logo">
+          <img src="https://www.krungsrinimble.com/theme-custom/images/logo.png" class="rounded" alt="nimble">
+        </div>
+        <h5 class="text-light margin-space">กรุณาเลือกหมวดหมู่ข้อสอบ</h5>
+        @for (category of categories; track category.questionCategoryId) {
+          <div class="form-check text">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" [value]='category.questionCategoryId' [id]="category.questionCategoryId" [(ngModel)]="categoryId" >
+            <label class="form-check-label text-light" for="flexRadioDefault">
+              {{category.title}}
+            </label>
+          </div>
+        }@empty {
+          Empty list of category
+          }
+          <div class="text-center"> 
+            <button type="button" class="btn btn-outline-warning col-md-4 margin-space" (click)="onSubmitCategory()">ตกลง</button>
+        </div>
+      </div>
+      
+  </div>
+</div>
