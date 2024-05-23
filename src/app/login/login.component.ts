@@ -2,27 +2,28 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { ModalSuccessComponent } from '../components/modal-success/modal-success.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFailComponent } from '../components/modal-fail/modal-fail.component';
 import { routes } from '../app.routes';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 
 export class LoginComponent implements OnInit {
 
-  formLogin: any = {
-    username: null,
-    password: null
+  form = {
+    username: '',
+    password: ''
   };
   submitted: boolean = false;
 
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
    
-    this.authService.login(this.formLogin.username, this.formLogin.password).subscribe({
+    this.authService.login(this.form.username, this.form.password).subscribe({
       next: data => {
         localStorage.setItem('accessToken', data.data.accessToken)
         const modalRef = this.modalService.open(ModalSuccessComponent, {centered : true});
@@ -56,9 +57,5 @@ export class LoginComponent implements OnInit {
         modalRef.componentInstance.message = 'เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบข้อมูลชื่อผู้ใช้หรือรหัสผ่าน'
       }
     });
-  }
-
-  openModalFunction() : void{
-
   }
 }

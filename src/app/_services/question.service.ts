@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { QuestionCategoryRes } from '../models/response/QuestionCategoryRes';
 import { QuestionDetailRes } from '../models/response/QuestionDetailRes';
+import { QuestionAnswerReq } from '../models/request/QuestionAnswerReq';
+import { SubmitAssignmentRes } from '../models/response/SubmitAssignmentRes';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -33,6 +35,16 @@ export class QuestionService {
   getQuestionByCategoriesId(id?: string): Observable<QuestionDetailRes> {
     return this.http.get<QuestionDetailRes>(
       AUTH_API + `questions/categories/${id}`,
+      httpOptions
+    );
+  }
+
+  submitAssignment(questions:QuestionAnswerReq): Observable<SubmitAssignmentRes> {
+    return this.http.post<SubmitAssignmentRes>(
+      AUTH_API + `questions/submit-assignment`,
+      {
+        ...questions  
+      },
       httpOptions
     );
   }

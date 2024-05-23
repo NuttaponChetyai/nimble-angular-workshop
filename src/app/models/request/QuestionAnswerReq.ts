@@ -1,6 +1,7 @@
-import { Answer } from "../Answers";
+
+import { Question } from "../Question";
 
 export interface QuestionAnswerReq {
-  questionId: string;
-  answers: Answer[];
+  questionCategoryId: string;
+  questions: Question[]
 }

@@ -4,14 +4,28 @@
             <div class="text-center logo-login">
                 <img src="https://www.krungsrinimble.com/theme-custom/images/logo.png" class="rounded" alt="nimble">
               </div>
-            <form name="formLogin" #f="ngForm" (ngSubmit)="onSubmit()">
+            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
                 <div class="mb-3">
-                    <label for="username" class="form-label text-light" for="username">ชื่อผู้ใช่งาน</label>
-                    <input type="text" class="form-control" [(ngModel)]="formLogin.username" name="username" id="username">
+                    <label for="username" class="form-label text-light" for="username">ชื่อผู้ใช้งาน</label>
+                    <input type="text" class="form-control" [(ngModel)]="form.username" required #username="ngModel" name="username" id="username" [ngClass]="{ 'is-invalid': f.submitted && username.errors }">
+                    @if (f.submitted && username.errors) {
+                        <div class="invalid-feedback">
+                          @if (username.errors['required']) {
+                          <div>กรุณากรอกชื่อผู้ใช้งาน</div>
+                          }
+                        </div>
+                      }
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label text-light" for="password">รหัสผ่าน</label>
-                    <input type="password" class="form-control" [(ngModel)]="formLogin.password" name="password" id="password">
+                    <input type="password" class="form-control" [(ngModel)]="form.password" required #password="ngModel" name="password" id="password" [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+                    @if (f.submitted && password.errors) {
+                        <div class="invalid-feedback">
+                          @if (password.errors['required']) {
+                          <div>กรุณากรอกรหัสผ่าน</div>
+                          }
+                        </div>
+                      }
                 </div>
                 <div class="text-center"> 
                     <button type="submit" class="btn btn-outline-warning col-md-4">เข้าสู่ระบบ</button>

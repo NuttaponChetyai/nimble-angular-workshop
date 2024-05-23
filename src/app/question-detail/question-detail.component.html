@@ -1,6 +1,6 @@
 <div class="container">
     <div class="d-flex justify-content-md-end">
-        @if (display) {<div class="col-md-2 text-center">
+        @if (display && !submitted) {<div class="col-md-2 text-center">
             <h2>นาฬิกาจับเวลา <br> {{display}}</h2>
         </div>
         }
@@ -20,26 +20,31 @@
                     {{question.answer}}
                 </label>
             </div>
-            }@empty {
-            Empty list of question
             }
-            @if(currentIndex !== (questionDetail?.data?.totalQuestion || 0) - 1){
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
-                        (click)="next(questionInfo?.questionId)">ถัดไป</button>
-                </div>
-            }
-            @if(questionDetail?.data?.totalQuestion == currentIndex+1){
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
-                        (click)="sendAnswer(questionInfo?.questionId)">ส่งคำตอบ</button>
-                </div>
+            @if(!submitted){
+                @if(currentIndex !== (questionDetail?.data?.totalQuestion || 0)){
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
+                            (click)="next(questionInfo!.questionId)">ถัดไป</button>
+                    </div>
                 }
-            @if(currentIndex >= 1){
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-warning col-md-4 margin-space" (click)="back()">ย้อนกลับ</button>
-                </div>
+                @if(questionDetail?.data?.totalQuestion == currentIndex){
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-warning col-md-4 margin-space"
+                            (click)="sendAnswer()">ส่งคำตอบ</button>
+                    </div>
+                    }
+                @if(currentIndex >= 1){
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-warning col-md-4 margin-space" (click)="back()">ย้อนกลับ</button>
+                    </div>
+                }
             }
+            @else{
+                <h3 class="text-light margin-space">คะแนนรวมทั้งหมด {{resultScore?.data?.fullScore}}</h3>
+                <h3 class="text-light margin-space">คะแนนที่ทำได้ {{resultScore?.data?.score}}</h3>
+            }
+          
            
 
         </div>
