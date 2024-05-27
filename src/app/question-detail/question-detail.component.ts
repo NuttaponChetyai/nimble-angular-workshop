@@ -127,6 +127,7 @@ export class QuestionDetailComponent {
       this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
 
       if (seconds == 0) {
+        this.sendAnswer();
         clearInterval(this.timer);
       }
     }, 1000);
